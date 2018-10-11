@@ -27,6 +27,7 @@ class Renderizador implements GLSurfaceView.Renderer, View.OnTouchListener {
     private int alturaY = 0;
     private int larguraX = 0;
     Activity vrActivity = null;
+    int codTextura = 0;
 
     Renderizador(Activity activity) {
         this.vrActivity = activity;
@@ -87,6 +88,7 @@ class Renderizador implements GLSurfaceView.Renderer, View.OnTouchListener {
         textCoords = generateBuffer(vetCoordText);
 
         gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, textCoords);
+        codTextura = carregaTextura(gl, R.mipmap.navever);
     }
 
     public int carregaTextura(GL10 gl, int codTextura) {
@@ -147,14 +149,14 @@ class Renderizador implements GLSurfaceView.Renderer, View.OnTouchListener {
         //(Determina o FPS)
 
         //Habilita o uso de textura
-        gl.glEnableClientState(GL10.GL_TEXTURE);
+        gl.glEnable(GL10.GL_TEXTURE_2D);
         //Habilita o desenho por vertices
         //Solicita openGL permissao para usar vetores de vertices
         gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-        gl.glRotatef(0, 0, 0, 1);
+        gl.glBindTexture(GL10.GL_TEXTURE_2D, codTextura);
         gl.glTranslatef(posX, posY, 0);
         gl.glColor4f(1, 1, 1, 0);
         gl.glVertexPointer(2, GL10.GL_FLOAT, 0, bufferPont);
