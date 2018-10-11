@@ -114,7 +114,7 @@ class Renderizador implements GLSurfaceView.Renderer, View.OnTouchListener {
         imagem.recycle();
 
         //retorna o
-        return 0;
+        return idTextura[0];
     }
 
     FloatBuffer generateBuffer(float[] coordenadas) {
